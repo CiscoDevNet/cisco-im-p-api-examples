@@ -1,0 +1,11 @@
+{
+  "params" : [
+      {
+        "SERVER" : "ds-cup11-5.cisco.com",
+        "USERNAME" : "administrator",
+        "PASSWD" : "ciscopsdt",
+		"ENDPOINTURL" : "http://10.118.89.231:5000/pws",
+		"HOST": "10.118.89.231"
+      }
+  ]
+}

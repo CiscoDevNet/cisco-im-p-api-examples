@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presenceList type="basic">
+    <contact contactURI="reed@ds-cup11-5.cisco.com" presenceStatus="AVAILABLE"/>
+</presenceList>
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<description xmlns="urn:cisco:cup:presence:soap">
+		<code>210</code>
+		<message>Max cpu utilization reached</message>
+		<fix>Wait before sending another request</fix>
+	</description>
+<?xml version="1.0" encoding="UTF-8"?>
+<presenceList type="basic">
+    <contact contactURI="reed@ds-cup11-5.cisco.com" presenceStatus="AWAY"/>
+</presenceList>
+<?xml version="1.0" encoding="UTF-8"?>
+<presenceList type="basic">
+    <contact contactURI="reed@ds-cup11-5.cisco.com" presenceStatus="DND"/>
+</presenceList>
+<?xml version="1.0" encoding="UTF-8"?>
+<presenceList type="basic">
+    <contact contactURI="reed@ds-cup11-5.cisco.com" presenceStatus="AVAILABLE"/>
+</presenceList>
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<description xmlns="urn:cisco:cup:presence:soap">
+		<code>133</code>
+		<message>The subscription id does not exist</message>
+		<fix>Ensure the value is not less than 0 or that the id was not previously unsubscribed</fix>
+	</description>
+<?xml version="1.0" encoding="UTF-8"?>
+<presenceList type="basic">
+    <contact contactURI="carlotta@ds-cup11-5.cisco.com" presenceStatus="UNAVAILABLE"/>
+    <contact contactURI="reed@ds-cup11-5.cisco.com" presenceStatus="AWAY"/>
+    <contact contactURI="rogue@ds-cup11-5.cisco.com" presenceStatus="UNKNOWN"/>
+</presenceList>
+<?xml version="1.0" encoding="UTF-8"?>
+<presenceList type="basic">
+    <contact contactURI="reed@ds-cup11-5.cisco.com" presenceStatus="AVAILABLE"/>
+</presenceList>
+<?xml version="1.0" encoding="UTF-8"?>
+<presenceList type="basic">
+    <contact contactURI="reed@ds-cup11-5.cisco.com" presenceStatus="AWAY"/>
+</presenceList>

@@ -1,11 +1,11 @@
 {
   "params" : [
       {
-        "SERVER" : "ds-cup11-5.cisco.com",
-        "USERNAME" : "administrator",
-        "PASSWD" : "ciscopsdt",
-		"ENDPOINTURL" : "http://10.118.89.231:5000/pws",
-		"HOST": "10.118.89.231"
+        "SERVER" : "<your Cisco IM&P server>",
+        "USERNAME" : "<Admin username for server>",
+        "PASSWD" : "<admin password>",
+		"ENDPOINTURL" : "http://<IP of your web service running endpoint.py>:5000/pws",
+		"HOST": "<host IP of the ENDPOINTURL>"
       }
   ]
 }

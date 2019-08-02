@@ -1,8 +1,8 @@
 {
   "params" : [
       {
-        "USERNAME" : "daggett",
-        "PASSWD" : "beaver"
+        "USERNAME" : "<Application user name>",
+        "PASSWD" : "<Application user password>"
       }
   ]
 }

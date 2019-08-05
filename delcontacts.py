@@ -9,6 +9,7 @@ copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -166,8 +167,9 @@ if __name__ == '__main__':
 # Add the contacts
 
 # The default group is hard coded in the XML as "Contacts".
-# If you want a different group, you need to change the XML below <urn:group name="Contacts">
-# to reflect the name of the group you want
+# If you want a different group, you need to change the XML below
+# where it says <urn:group name="Contacts"> in order to
+# reflect the name of the group you want
 
 # Python rejects methods and variable names with hyphens (like "add-contact" and "session-key")
 # because Python only recognizes the hyphen as a subtraction operation
@@ -182,7 +184,7 @@ if __name__ == '__main__':
               <urn:session-key>"""+ekey+"""</urn:session-key>
            </soap:Header>
            <soap:Body>
-              <urn:add-contact>
+              <urn:delete-contact>
                  <urn:group name="Contacts">"""
 
     for i in range(length):

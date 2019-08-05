@@ -44,13 +44,15 @@ if __name__ == '__main__':
 			else:
 				override = 'true'
 
+# Fetch the server information from serverparams.json.  For this script,
+# we don't need anything more than that from serverparams.json
+
 			with open('serverparams.json') as json_file:
 				data = json.load(json_file)
 				for p in data['params']:
 					SERVER = p['SERVER']
-					USERNAME = p['USERNAME']
-					PASSWD = p['PASSWD']
-					ENDPOINTURL = p['ENDPOINTURL']
+
+# We need the application user's username and password
 
 			with open('appuser.json') as json_file:
 				data = json.load(json_file)
@@ -58,10 +60,17 @@ if __name__ == '__main__':
 					AUSERNAME = p['USERNAME']
 					APASSWORD = p['PASSWD']
 
+# Since we're setting the presence of the end user's contact, fetch that
+# user ID, not the end user's ID, which isn't needed for setting the contact's
+# presence
+
 			with open('enduser.json') as json_file:
 				data = json.load(json_file)
 				for p in data['params']:
 					CUSERNAME = p['CONTACT']
+
+# The first thing to do is log in the application user and get the application
+# user's session key.
 
 			passwordxml = '<session><password>'+APASSWORD+'</password></session>'
 
@@ -81,6 +90,9 @@ if __name__ == '__main__':
 			print('\n\n')
 			print('App User Session Key = '+asessionKey)
 
+# Once we have the application user's session key, we use it to log in
+# the end user contact.  No end user password is needed.
+
 			headers = { 'Presence-Session-Key': asessionKey }
 
 			response = requests.post('https://'+SERVER+':8083/presence-service/users/'+CUSERNAME+'/sessions', headers=headers, verify=False)
@@ -93,6 +105,8 @@ if __name__ == '__main__':
 
 			print('End User Session Key = '+esessionKey)
 			print('\n\n')
+
+# Now we set the presence of the end user's contact, as provided in enduser.json
 
 			headers = { 'Presence-Session-Key': esessionKey, 'Presence-Expiry': '3600', 'Presence-Override': override }
 

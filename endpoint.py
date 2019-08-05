@@ -128,6 +128,7 @@ if __name__ == "__main__":
 
 # Use the end user session key to fetch (GET) the latest presence information
 # and write it to the status.txt file.
+
 # This assumes the subscription ID is 1, which is not a safe assumption
 # under normal circumstances, but it works for the purpose of this demo
 

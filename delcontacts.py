@@ -38,6 +38,7 @@ from zeep.exceptions import Fault
 # We use "json" to read in json files with data such as server, username, password
 
 # This class lets you view the incoming and outgoing http headers and/or XML
+
 class MyLoggingPlugin(Plugin):
 
     def ingress(self, envelope, http_headers, operation):
@@ -164,7 +165,7 @@ if __name__ == '__main__':
     for i in range(length):
         chgcontacts.append('<urn:persona-id domain="'+SERVER+'">'+contacts[i]+'</urn:persona-id>')
 
-# Add the contacts
+# Delete the contacts
 
 # The default group is hard coded in the XML as "Contacts".
 # If you want a different group, you need to change the XML below

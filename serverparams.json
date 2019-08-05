@@ -4,8 +4,8 @@
         "SERVER" : "<your Cisco IM&P server>",
         "USERNAME" : "<Admin username for server>",
         "PASSWD" : "<admin password>",
-		"ENDPOINTURL" : "http://<IP of your web service running endpoint.py>:5000/pws",
-		"HOST": "<host IP of the ENDPOINTURL>"
+        "ENDPOINTURL" : "http://<IP of your web service running endpoint.py>:5000/pws",
+        "HOST": "<host IP of the ENDPOINTURL>"
       }
   ]
 }

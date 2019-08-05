@@ -1,4 +1,4 @@
-"""addcontacts.py adds contacts to a user's Jabber account
+"""delcontacts.py deletes contacts from a user's Jabber account
 
 Copyright (c) 2018 Cisco and/or its affiliates.
 Permission is hereby granted, free of charge, to any person obtaining a copy

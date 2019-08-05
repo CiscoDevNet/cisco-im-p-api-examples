@@ -2,7 +2,7 @@
   "params" : [
       {
         "USERNAME" : "<Jabber end user name>",
-		"CONTACT" : "<End user contact name you want to monitor for presence>"
+        "CONTACT" : "<End user contact name you want to monitor for presence>"
       }
   ]
 }

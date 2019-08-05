@@ -23,13 +23,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-
 import requests
 import json
 from lxml import etree
 
 if __name__ == '__main__':
-
 
 	with open('serverparams.json') as json_file:
 		data = json.load(json_file)
@@ -81,56 +79,24 @@ if __name__ == '__main__':
 
 	headers = { 'Presence-Session-Key': esessionKey }
 
+# Technically, you should only have to delete subscription 1.
+# Deleting subscriptions 1-4 is overkill, but it's a way to guarantee that you
+# remove all subscriptions you may have accidentally created by running pws-create.py
+# multiple times
+
 	response = requests.delete('https://'+SERVER+':8083/presence-service/users/'+EUSERNAME+'/subscriptions/1', headers=headers, verify=False)
-
-	print('\n\n')
-	print(response.text)
-	print(response.content)
-	print(response.headers)
-	print('\n\n')
-
 	response = requests.delete('https://'+SERVER+':8083/presence-service/users/'+EUSERNAME+'/subscriptions/2', headers=headers, verify=False)
-
-	print('\n\n')
-	print(response.text)
-	print(response.content)
-	print(response.headers)
-	print('\n\n')
-
 	response = requests.delete('https://'+SERVER+':8083/presence-service/users/'+EUSERNAME+'/subscriptions/3', headers=headers, verify=False)
-
-	print('\n\n')
-	print(response.text)
-	print(response.content)
-	print(response.headers)
-	print('\n\n')
+	response = requests.delete('https://'+SERVER+':8083/presence-service/users/'+EUSERNAME+'/subscriptions/4', headers=headers, verify=False)
 
 	headers = { 'Presence-Session-Key': asessionKey }
 
+# Technically, you should only have to delete endpoint 1.
+# Deleting endpoints 1-4 is overkill, but it's a way to guarantee that you
+# remove all endpoints you may have accidentally created by running pws-create.py
+# multiple times
+
 	response = requests.delete('https://'+SERVER+':8083/presence-service/endpoints/1', headers=headers, verify=False)
-	print('\n\n')
-	print(response.text)
-	print(response.content)
-	print(response.headers)
-	print('\n\n')
-
 	response = requests.delete('https://'+SERVER+':8083/presence-service/endpoints/2', headers=headers, verify=False)
-	print('\n\n')
-	print(response.text)
-	print(response.content)
-	print(response.headers)
-	print('\n\n')
-
 	response = requests.delete('https://'+SERVER+':8083/presence-service/endpoints/3', headers=headers, verify=False)
-	print('\n\n')
-	print(response.text)
-	print(response.content)
-	print(response.headers)
-	print('\n\n')
-
 	response = requests.delete('https://'+SERVER+':8083/presence-service/endpoints/4', headers=headers, verify=False)
-	print('\n\n')
-	print(response.text)
-	print(response.content)
-	print(response.headers)
-	print('\n\n')

@@ -33,7 +33,7 @@ if __name__ == '__main__':
 			SERVER = p['SERVER']
 			USERNAME = p['USERNAME']
 			PASSWD = p['PASSWD']
-			ENDPOINTURL = p['ENDPOINTURL']
+			HOST = p['HOST']
 
 	with open('appuser.json') as json_file:
 		data = json.load(json_file)
@@ -81,7 +81,7 @@ if __name__ == '__main__':
 
 	headers = { 'Presence-Session-Key': asessionKey, 'Presence-Expiry': '3600' }
 
-	print("End Point = " + ENDPOINTURL)
+	print("End Point = http://" + ENDPOINTURL + ':5000/pws')
 	print('\n\n')
 
 	endpointxml = '<endpoint><url>'+ENDPOINTURL+'</url></endpoint>'

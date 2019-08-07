@@ -74,7 +74,6 @@ if __name__ == "__main__":
 			SERVER = p['SERVER']
 			USERNAME = p['USERNAME']
 			PASSWD = p['PASSWD']
-			ENDPOINTURL = p['ENDPOINTURL']
 			HOST = p['HOST']
 
 	with open('appuser.json') as json_file:

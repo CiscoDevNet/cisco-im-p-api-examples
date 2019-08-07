@@ -35,7 +35,6 @@ if __name__ == '__main__':
 			SERVER = p['SERVER']
 			USERNAME = p['USERNAME']
 			PASSWD = p['PASSWD']
-			ENDPOINTURL = p['ENDPOINTURL']
 
 	with open('appuser.json') as json_file:
 		data = json.load(json_file)

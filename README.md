@@ -11,8 +11,15 @@ You can download the documentation from here:
 
 ## THE EPASSoap SCRIPTS
 
+## `addcontacts.py` and `delcontacts.py`
+
+These are self-explanatory optional scripts for adding and deleting contacts
+for the end user.  If you already have users and contacts set up to work with,
+you won't need these scripts.
+
 The API requests to add and delete contacts are only available as SOAP
-requests.  So `addcontacts.py` and `delcontacts.py` both use EPASSoap.
+requests.  So `addcontacts.py` and `delcontacts.py` both use EPASSoap,
+not REST.
 
 ## THE PWS SCRIPTS
 
@@ -29,11 +36,35 @@ This returns the app user session key
 2. Use the app user session key to log in an end user with the end
 user username, which returns an end user session key
 
+3. Use the session keys to access the API requests you want.
+
 ## `pws-create.py`
 
 1. Log in the application user and end user.
 
-2. 
+2. Use the app user session key to specify an endpoint URL.  This URL
+points to the web service that will receive presence notifications.
+
+3. Use the end user session key to subscribe for presence notifications
+of a list of specified contacts.  When the presence for one of these
+contacts changes, it will trigger a notification sent to the endpoint.
+It is the responsibility of the web service endpoint to fetch the
+actual presence status, whether it's BASIC presence or RICH presence.
+
+## `pws-delete.py`
+
+This script is simply an "undo" for `pws-create.py`.  It unsubscribes
+presence notifications for the contacts and unregisters the endpoint URL.
+
+Use this script to clear the subscriptions and endpoint when you want
+to change anything and try again.
+
+## `endpoint.py`
+
+This is the web service that listens on port 5000 for REST-initiated
+notifications that a contact's presence has changed.  It responds by
+using a REST request to fetch the BASIC presence for that contact,
+and appends the presence status response to the file `status.txt`.
 
 ## HOW TO PREPARE TO USE THE SCRIPTS
 

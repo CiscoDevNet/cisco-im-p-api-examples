@@ -1,12 +1,46 @@
 # Cisco IM&P SOAP and REST examples
 
+## A TALE OF TWO SERVICES
 
+These scripts employ two different Cisco IM&P services. One is `EPASSoap`,
+obviously a SOAP API.  The other is `PWS`, for which you can use SOAP or REST.
+The examples here use REST for `PWS`.
+
+You can download the documentation from here:
+(https://developer.cisco.com/site/im-and-presence/documents/presence_web_service/latest_version/)
+
+## THE EPASSoap SCRIPTS
+
+The API requests to add and delete contacts are only available as SOAP
+requests.  So `addcontacts.py` and `delcontacts.py` both use EPASSoap.
+
+## THE PWS SCRIPTS
+
+The API to set up your own presence notification handler is `PWS` or
+`Presence Web Services`.  You can use SOAP or REST here, but REST is a
+simpler API to work with, so our examples use REST, `pws-create.py`,
+`pws-delete.py`, `endpoint.py` and (optional) `setpresence.py`.
+
+The REST API procedure is generally as follows:
+
+1. Log in an application user with the username and password.
+This returns the app user session key
+
+2. Use the app user session key to log in an end user with the end
+user username, which returns an end user session key
+
+## `pws-create.py`
+
+1. Log in the application user and end user.
+
+2. 
 
 ## HOW TO PREPARE TO USE THE SCRIPTS
 
 ### INSTALL PYTHON
 
-Install Python 3.7
+Install Python 3.7.  Follow the instructions for your OS from here:
+(https://docs.python.org/3.7/using/index.html)
 
 On Windows, choose the option to add to PATH environment variable
 
@@ -22,30 +56,30 @@ project, and not necessarily installed in your default Python setup.
 See this link for instructions on how to set up a virtual environment
 for your operating system: (https://docs.python.org/3/tutorial/venv.html)
 
+Follow the instructions for entering your virtual environment, and then
+proceed to install the necessary Python library dependencies for this
+project.
+
+Once you have your virtual environment installed, execute the correct
+`activate` procedure for your OS so that you're operating from within
+the virtual environment.
+
 ### INSTALL PYTHON DEPENDENCIES
 
-It is advisable to create a virtual environment and work from that environment
-instead of using your default Python installation.
+The commands you'll need to install dependencies will vary from OS to OS.
+Start with
+
+    $ pip install zeep
+
+This should automatically install most libraries you'll need. If you get
+a message when you run a script that says your `import` doesn't work,
+then try to `pip install <that dependency>`.  
 
 Script Dependencies:
     `lxml`
     `requests`
     `zeep`
     `json`
-
-Additional dependency for `endpoint.py`:
-    `flask`
-
-Dependency Installation:
-
-    $ pip install zeep
-
-On Windows, this will install automatically all of `zeep` dependencies,
-including `lxml` and `requests`.
-
-It may not install all dependencies on a platform other than Windows,
-so be aware that you may need to `pip install` one or more dependencies
-individually.
 
 The `endpoint.py` script needs `flask`, so run:
 
@@ -92,10 +126,17 @@ of your application user.
 
 3. **[REQUIRED]** Edit `enduser.json` to include the username of the user whose
 contacts you want to add, and the name of one of that user's contacts.
+
 You want to specify only the user names, not the full JIDs.  In other words,
-you want `joe` not `joe@somedomain.com`.  The `CONTACT` name is used by
-the Presence Web Services (PWS) scripts `pws-create.py`, `pws-delete.py`,
-`setpresence.py` and `endpoint.py`.
+you want `joe` not `joe@somedomain.com`.  
+
+The `USERNAME` is the name of the end user whose contact's presence you want
+to monitor.
+
+The `CONTACT` is the name of the user whose presence you want to monitor.
+
+This data is used by the Presence Web Services (PWS) scripts
+`pws-create.py`, `pws-delete.py`, `setpresence.py` and `endpoint.py`.
 
 ```
 {
@@ -119,17 +160,19 @@ In case you don't already have contacts for your test user, edit
 to add (or delete later) with `addcontacts.py` and `delcontacts.py`.
 
 Make sure one of these contacts is the `CONTACT` you specified in
-`enduser.json`.
+`enduser.json` (see above).
 
-For example:
+For example, if you specified `carlotta` as your `CONTACT`, you'll want
+`carlotta` in the list:
 
 ```
-[ "carlotta", "reed", "rogue" ]
+[ "carlotta", "reed", "joe" ]
 ```
 
 All contacts go into a group called `Contacts`.  This is hard coded
 in the scripts, so you'd have to change the scripts to change that
-group to another group name.
+group to another group name.  This shouldn't be necessary for the
+scripts to work.  
 
 If you're using the contacts only for testing purposes, you can remove
 them when you're done with the script `delcontacts.py`.

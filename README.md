@@ -3,6 +3,8 @@
 
 
 
+## HOW TO PREPARE TO USE THE SCRIPTS
+
 Install Python 3.7
 
 On Windows, choose the option to add to PATH environment variable
@@ -38,17 +40,17 @@ The `endpoint.py` script needs `flask`, so run:
 
     $ pip install flask
 
-## SET YOUR PARAMETERS
+### SET YOUR PARAMETERS
 
 1. Edit `serverparams.json` to point to your Cisco IM&P server and the
 administrator username and password credentials.  
 
-The file also contains the endpoint URL and endpoint IP address (host).
-This information is not needed for all scripts, but the endpoint script
-shares this file and needs to know the host.  The default port for
-the web service is 5000, but you can change that within the script.
-If you change the port, make sure you change `serverparams.json` to reflect
-that change.
+The file also contains the host IP for the endpoint URL.  This is the
+URL for the web service that listens for presence notifications.
+
+The default port for the web service is 5000, so you'll need to make
+sure the PC or server running `endpoint.py` can accept TCP traffic
+over port 5000.  
 
 ```
 {
@@ -64,7 +66,7 @@ that change.
 ```
 
 2. Edit `appuser.json` to include the username and password of your
-application user.
+application user.  
 
 ```
 {
@@ -95,12 +97,16 @@ the Presence Web Services (PWS) scripts `pws-create.py`, `pws-delete.py`,
 }
 ```
 
-4. In case you don't already have contacts for your test user, edit
+4. If the contact you specified for your end user already exists in
+the end user's "buddy list" or "contacts" (or however your client
+refers to contacts), you won't need to use `addcontacts.py`.  
+
+In case you don't already have contacts for your test user, edit
 contacts.list to include the names of one or more contacts you want
 to add (or delete later) with `addcontacts.py` and `delcontacts.py`.
-Make sure your end user has the `CONTACT` you specified in
-`enduser.json`. If you need to add that contact, you can list it
-here.  
+
+Make sure one of these contacts is the `CONTACT` you specified in
+`enduser.json`.
 
 For example:
 
@@ -111,3 +117,6 @@ For example:
 All contacts go into a group called `Contacts`.  This is hard coded
 in the scripts, so you'd have to change the scripts to change that
 group to another group name.
+
+If you're using the contacts only for testing purposes, you can remove
+them when you're done with the script `delcontacts.py`.

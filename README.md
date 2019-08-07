@@ -50,21 +50,23 @@ the web service is 5000, but you can change that within the script.
 If you change the port, make sure you change `serverparams.json` to reflect
 that change.
 
+```
 {
   "params" : [
       {
         "SERVER" : "<your cimp server>",
         "USERNAME" : "administrator",
         "PASSWD" : "password"
-        "ENDPOINTURL" : "http://<IP of your host running endpoint.py>:5000/pws",
         "HOST": "<host IP of the ENDPOINTURL>"
       }
   ]
 }
+```
 
 2. Edit `appuser.json` to include the username and password of your
 application user.
 
+```
 {
   "params" : [
       {
@@ -73,6 +75,7 @@ application user.
       }
   ]
 }
+```
 
 3. Edit `enduser.json` to include the username of the user whose contacts
 you want to add, and the name of one of that user's contacts. You want to
@@ -81,6 +84,7 @@ specify only the user names, not the full JIDs.  In other words, you want
 the Presence Web Services (PWS) scripts `pws-create.py`, `pws-delete.py`,
 `setpresence.py` and `endpoint.py`.
 
+```
 {
   "params" : [
       {
@@ -89,6 +93,7 @@ the Presence Web Services (PWS) scripts `pws-create.py`, `pws-delete.py`,
       }
   ]
 }
+```
 
 4. In case you don't already have contacts for your test user, edit
 contacts.list to include the names of one or more contacts you want
@@ -99,7 +104,9 @@ here.
 
 For example:
 
+```
 [ "carlotta", "reed", "rogue" ]
+```
 
 All contacts go into a group called `Contacts`.  This is hard coded
 in the scripts, so you'd have to change the scripts to change that

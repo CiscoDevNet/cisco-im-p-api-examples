@@ -66,6 +66,18 @@ notifications that a contact's presence has changed.  It responds by
 using a REST request to fetch the BASIC presence for that contact,
 and appends the presence status response to the file `status.txt`.
 
+## `setpresence.py`
+
+This project works fine without this script if you want to change
+the presence of a contact using any XMPP/Jabber client.  
+If you don't want to use an XMPP/Jabber client, you can use this script
+to change the presence of the contact defined in `enduser.json`.
+
+Usage:
+
+`python setpresence.py <one of AVAILABLE, BUSY, DND, AWAY, UNAVAILABLE or VACATION>`
+
+
 ## HOW TO PREPARE TO USE THE SCRIPTS
 
 ### INSTALL PYTHON

@@ -97,7 +97,9 @@ the Presence Web Services (PWS) scripts `pws-create.py`, `pws-delete.py`,
 }
 ```
 
-4. If the contact you specified for your end user already exists in
+4. **[OPTIONAL]** Edit `contacts.list` to include contacts for your end user.
+
+If the contact you specified for your end user already exists in
 the end user's "buddy list" or "contacts" (or however your client
 refers to contacts), you won't need to use `addcontacts.py`.  
 

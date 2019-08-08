@@ -14,16 +14,19 @@ You can download the documentation from here:
 1. Edit the json and list files to define your server, users, contact, etc.
 (see `SET YOUR PARAMETERS` below)
 
-2. Run the endpoint listener web service script `endpoint.py`
+2. Make sure the computer you're using for the endpoint can accept and
+respond to TCP port 5000 (generally via firewall settings)
+
+3. Run the endpoint listener web service script `endpoint.py`
 
     $ python endpoint.py
 
-3. Run the script `pws-create.py`.  This tells Cisco IM&P about the endpoint,
+4. Run the script `pws-create.py`.  This tells Cisco IM&P about the endpoint,
 and subscribes to presence notifications for a contact.
 
     $ python pws-create.py
 
-4. Change the presence of the contact you defined in `enduser.json`.
+5. Change the presence of the contact you defined in `enduser.json`.
 You can do this with a Jabber/XMPP client or with the script `setpresence.py`
 
     $ python setpresence.py <presence, such as AVAILABLE>

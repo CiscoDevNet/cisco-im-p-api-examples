@@ -19,17 +19,23 @@ respond to TCP port 5000 (generally via firewall settings)
 
 3. Run the endpoint listener web service script `endpoint.py`
 
+```
   $ python endpoint.py
+```
 
 4. Run the script `pws-create.py`.  This tells Cisco IM&P about the endpoint,
 and subscribes to presence notifications for a contact.
 
+```
   $ python pws-create.py
+```
 
 5. Change the presence of the contact you defined in `enduser.json`.
 You can do this with a Jabber/XMPP client or with the script `setpresence.py`
 
+```
   $ python setpresence.py <presence, such as AVAILABLE>
+```
 
 ## THE EPASSoap SCRIPTS
 
@@ -134,7 +140,9 @@ the virtual environment.
 The commands you'll need to install dependencies will vary from OS to OS.
 Start with
 
+```
     $ pip install zeep
+```
 
 This should automatically install most libraries you'll need. If you get
 a message when you run a script that says your `import` doesn't work,
@@ -148,7 +156,9 @@ Script Dependencies:
 
 The `endpoint.py` script needs `flask`, so run:
 
+```
     $ pip install flask
+```
 
 ### SET YOUR PARAMETERS
 

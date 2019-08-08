@@ -25,15 +25,20 @@ from lxml import etree
 
 if __name__ == '__main__':
 
-# Get all the necessary user information for the server, cucm admin, adminuser, enduser
+# Get the necessary data, such as the server, username/password of the
+# application user and username of the end user
+
 
 	with open('serverparams.json') as json_file:
 		data = json.load(json_file)
 		for p in data['params']:
 			SERVER = p['SERVER']
-			USERNAME = p['USERNAME']
-			PASSWD = p['PASSWD']
 			HOST = p['HOST']
+
+# Set the endpoint URL - this is the Presence Web Service that will
+# receive notifications that presence for a user has changed
+
+	ENDPOINTURL = 'http://' + HOST + ':5000/pws'
 
 	with open('appuser.json') as json_file:
 		data = json.load(json_file)
@@ -46,6 +51,13 @@ if __name__ == '__main__':
 		for p in data['params']:
 			EUSERNAME = p['USERNAME']
 
+
+# Log in as the application user to get the application user session key
+# There are two ways to log in.  One forces Cisco IM&P to create a new
+# session key every time, the other allows you to repeat this request
+# and get the same session key every time.  We're using the latter method.
+# See (https://developer.cisco.com/site/im-and-presence/documents/presence_web_service/latest_version/)
+# for the differences between the two methods.
 
 	passwordxml = '<session><password>'+APASSWORD+'</password></session>'
 
@@ -66,6 +78,13 @@ if __name__ == '__main__':
 	print('\n\n')
 	print('App User Session Key = '+asessionKey)
 
+# Log in as the end user to get the end user session key
+# There are two ways to log in.  One forces Cisco IM&P to create a new
+# session key every time, the other allows you to repeat this request
+# and get the same session key every time.  We're using the latter method.
+# See (https://developer.cisco.com/site/im-and-presence/documents/presence_web_service/latest_version/)
+# for the differences between the two methods.
+
 	headers = { 'Presence-Session-Key': asessionKey }
 
 	response = requests.post('https://'+SERVER+':8083/presence-service/users/'+EUSERNAME+'/sessions', headers=headers, verify=False)
@@ -78,6 +97,9 @@ if __name__ == '__main__':
 
 	print('End User Session Key = '+esessionKey)
 	print('\n\n')
+
+# Use the application user session key to tell Cisco IM&P where
+# the endpoint (Presence Web Service) listener is (endpoint URL)
 
 	headers = { 'Presence-Session-Key': asessionKey, 'Presence-Expiry': '3600' }
 
@@ -94,8 +116,11 @@ if __name__ == '__main__':
 	ENDPOINTID = response.headers['Location'][-1]
 	print('Endpoint ID = '+ENDPOINTID)
 
+# Use the end user session key to subscribe to presence notifications for
+# one or more contacts
 
-# The object in this next section is to build a subscription list something like this:
+# The object in this next section is to build a subscription list something
+# like this from the contacts.list file:
 
 #<subscription>
 #	<contactsList>
@@ -132,6 +157,12 @@ if __name__ == '__main__':
 	headers = { 'Presence-Session-Key': esessionKey, 'Presence-Expiry': '3600' }
 
 	response = requests.post('https://'+SERVER+':8083/presence-service/users/'+EUSERNAME+'/subscriptions', headers=headers, data=xml, verify=False)
+
+# For the purposes of testing, the SUBSCRIPTIONID should always be "1".  If
+# you get anything other than "1" then you probably ran this script
+# multiple times without deleting the information with the script
+# pws-delete.py in order to clear the endpoint and subscriptions before
+# testing again.
 
 	print(response.text)
 	print(response.content)

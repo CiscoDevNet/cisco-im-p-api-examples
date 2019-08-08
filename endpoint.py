@@ -130,6 +130,9 @@ if __name__ == "__main__":
 
 # This assumes the subscription ID is 1, which is not a safe assumption
 # under normal circumstances, but it works for the purpose of this demo
+# as long as you followed the instructions for running pws-create.py
+# and running pws-delete.py to clear your endpoint and subscriptions
+# before running pws-create.py again.
 
 	headers = { 'Presence-Session-Key': esessionKey }
 

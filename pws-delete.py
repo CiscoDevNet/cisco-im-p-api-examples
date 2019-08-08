@@ -29,12 +29,13 @@ from lxml import etree
 
 if __name__ == '__main__':
 
+# Get the necessary data, such as the server, username/password of the
+# application user and username of the end user
+
 	with open('serverparams.json') as json_file:
 		data = json.load(json_file)
 		for p in data['params']:
 			SERVER = p['SERVER']
-			USERNAME = p['USERNAME']
-			PASSWD = p['PASSWD']
 
 	with open('appuser.json') as json_file:
 		data = json.load(json_file)
@@ -46,6 +47,13 @@ if __name__ == '__main__':
 		data = json.load(json_file)
 		for p in data['params']:
 			EUSERNAME = p['USERNAME']
+
+# Log in as the application user to get the application user session key
+# There are two ways to log in.  One forces Cisco IM&P to create a new
+# session key every time, the other allows you to repeat this request
+# and get the same session key every time.  We're using the latter method.
+# See (https://developer.cisco.com/site/im-and-presence/documents/presence_web_service/latest_version/)
+# for the differences between the two methods.
 
 	passwordxml = '<session><password>'+APASSWORD+'</password></session>'
 
@@ -66,6 +74,13 @@ if __name__ == '__main__':
 	print('App User Session Key = '+asessionKey)
 	print('\n\n')
 
+# Log in as the end user to get the end user session key
+# There are two ways to log in.  One forces Cisco IM&P to create a new
+# session key every time, the other allows you to repeat this request
+# and get the same session key every time.  We're using the latter method.
+# See (https://developer.cisco.com/site/im-and-presence/documents/presence_web_service/latest_version/)
+# for the differences between the two methods.
+
 	headers = { 'Presence-Session-Key': asessionKey }
 
 	response = requests.post('https://'+SERVER+':8083/presence-service/users/'+EUSERNAME+'/sessions', headers=headers, verify=False)
@@ -76,24 +91,28 @@ if __name__ == '__main__':
 		if element.tag == "sessionKey":
 			esessionKey = element.text
 
-	headers = { 'Presence-Session-Key': esessionKey }
+# Use the end user session key to unsubscribe to presence notifications
 
 # Technically, you should only have to delete subscription 1.
 # Deleting subscriptions 1-4 is overkill, but it's a way to guarantee that you
 # remove all subscriptions you may have accidentally created by running pws-create.py
 # multiple times
 
+	headers = { 'Presence-Session-Key': esessionKey }
+
 	response = requests.delete('https://'+SERVER+':8083/presence-service/users/'+EUSERNAME+'/subscriptions/1', headers=headers, verify=False)
 	response = requests.delete('https://'+SERVER+':8083/presence-service/users/'+EUSERNAME+'/subscriptions/2', headers=headers, verify=False)
 	response = requests.delete('https://'+SERVER+':8083/presence-service/users/'+EUSERNAME+'/subscriptions/3', headers=headers, verify=False)
 	response = requests.delete('https://'+SERVER+':8083/presence-service/users/'+EUSERNAME+'/subscriptions/4', headers=headers, verify=False)
 
-	headers = { 'Presence-Session-Key': asessionKey }
+# Use the application user session key to delete the endpoint definition
 
 # Technically, you should only have to delete endpoint 1.
 # Deleting endpoints 1-4 is overkill, but it's a way to guarantee that you
 # remove all endpoints you may have accidentally created by running pws-create.py
 # multiple times
+
+	headers = { 'Presence-Session-Key': asessionKey }
 
 	response = requests.delete('https://'+SERVER+':8083/presence-service/endpoints/1', headers=headers, verify=False)
 	response = requests.delete('https://'+SERVER+':8083/presence-service/endpoints/2', headers=headers, verify=False)

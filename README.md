@@ -3,11 +3,30 @@
 ## A TALE OF TWO SERVICES
 
 These scripts employ two different Cisco IM&P services. One is `EPASSoap`,
-obviously a SOAP API.  The other is `PWS`, for which you can use SOAP or REST.
-The examples here use REST for `PWS`.
+obviously a SOAP API.  The other is `Presence Web Services` `(PWS)`,
+for which you can use SOAP or REST. The examples here use REST for `PWS`.
 
 You can download the documentation from here:
 (https://developer.cisco.com/site/im-and-presence/documents/presence_web_service/latest_version/)
+
+## HOW TO USE THE SCRIPTS
+
+1. Edit the json and list files to define your server, users, contact, etc.
+(see `SET YOUR PARAMETERS` below)
+
+2. Run the endpoint listener web service script `endpoint.py`
+
+    $ python endpoint.py
+
+3. Run the script `pws-create.py`.  This tells Cisco IM&P about the endpoint,
+and subscribes to presence notifications for a contact.
+
+    $ python pws-create.py
+
+4. Change the presence of the contact you defined in `enduser.json`.
+You can do this with a Jabber/XMPP client or with the script `setpresence.py`
+
+    $ python setpresence.py <presence, such as AVAILABLE>
 
 ## THE EPASSoap SCRIPTS
 
